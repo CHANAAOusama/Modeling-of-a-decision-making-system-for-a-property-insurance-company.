@@ -1,0 +1,118 @@
+<Schema name="assuraceSchema">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="dimClient">
+    <Hierarchy name="default" visible="true" hasAll="true" primaryKey="id_client">
+      <Table name="client">
+      </Table>
+      <Level name="id_client" visible="true" table="client" column="id_client" nameColumn="id_client" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="nom" visible="true" table="client" column="nom" nameColumn="nom" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="prenom" visible="true" table="client" column="prenom" nameColumn="prenom" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="tel" visible="true" table="client" column="tel" nameColumn="tel" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="adresse" visible="true" table="client" column="adresse" nameColumn="adresse" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="dimOperateur">
+    <Hierarchy name="default" visible="true" hasAll="true" primaryKey="id_operateur">
+      <Table name="opereteur">
+      </Table>
+      <Level name="id_operateur" visible="true" table="opereteur" column="id_operateur" nameColumn="id_operateur" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="nom" visible="true" table="opereteur" column="nom" nameColumn="nom" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="prenom" visible="true" table="opereteur" column="prenom" nameColumn="prenom" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="tel" visible="true" table="opereteur" column="tel" nameColumn="tel" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="adresse" visible="true" table="opereteur" column="adresse" nameColumn="adresse" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="dimBien">
+    <Hierarchy name="default" visible="true" hasAll="true" primaryKey="id_bien">
+      <Table name="bien">
+      </Table>
+      <Level name="id_bien" visible="true" table="bien" column="id_bien" nameColumn="id_bien" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="couverture" visible="true" table="bien" column="couverture" nameColumn="couverture" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="dimDate">
+    <Hierarchy name="default" visible="true" hasAll="true" primaryKey="date">
+      <Table name="date">
+      </Table>
+      <Level name="id_date" visible="true" table="date" column="date" nameColumn="date" type="Timestamp" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+      </Level>
+      <Level name="mois" visible="true" table="date" column="mois" nameColumn="mois" type="Integer" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="dimRisque">
+    <Hierarchy name="default" visible="true" hasAll="true" primaryKey="id_risque">
+      <Table name="risque">
+      </Table>
+      <Level name="id_risque" visible="true" table="risque" column="id_risque" nameColumn="id_risque" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="note" visible="true" table="risque" column="id_note" nameColumn="id_note" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="type" visible="true" table="risque" column="type" nameColumn="type" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="valider" visible="true" table="risque" column="valider" nameColumn="valider" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="libelle de note" visible="true" table="risque" column="libelle" nameColumn="libelle" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="dimEtat">
+    <Hierarchy name="default" visible="true" hasAll="true" primaryKey="id_etat">
+      <Table name="etat">
+      </Table>
+      <Level name="id_etat" visible="true" table="etat" column="id_etat" nameColumn="id_etat" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="libelle" visible="true" table="etat" column="libelle" nameColumn="libelle" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="policeCube" visible="true" cache="true" enabled="true">
+    <Table name="police">
+    </Table>
+    <DimensionUsage source="dimClient" name="DimClient" visible="true" foreignKey="id_client" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="dimOperateur" name="DimOperateur" visible="true" foreignKey="id_operateur" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="dimDate" name="DimDateTransaction" visible="true" foreignKey="id_dateTransaction" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="dimDate" name="DimDateEffet" visible="true" foreignKey="id_dateEffet" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="dimRisque" name="DimRisque" visible="true" foreignKey="id_risque" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="dimBien" name="DimBien" visible="true" foreignKey="id_bien" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="dimEtat" name="DimEtat" visible="true" foreignKey="id_etat" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="CA" column="CA" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="SinistreCube" visible="true" cache="true" enabled="true">
+    <Table name="sinistre">
+    </Table>
+    <DimensionUsage source="dimClient" name="DimClient" visible="true" foreignKey="id_client" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="dimOperateur" name="DimOperateur" visible="true" foreignKey="id_operateur" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="dimDate" name="DimDateTransaction" visible="true" foreignKey="id_dateTransaction" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="dimDate" name="DimDateEffet" visible="true" foreignKey="id_dateEffet" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="dimRisque" name="DimRisque" visible="true" foreignKey="id_risque" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="dimBien" name="DimBien" visible="true" foreignKey="id_bien" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="nbr sinistre" column="nb sinistre" aggregator="count" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
